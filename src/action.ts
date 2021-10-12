@@ -6,6 +6,7 @@ import {
   getBranchFromRef,
   isPr,
   getCommits,
+  getScopedCommits,
   getLatestPrereleaseTag,
   getLatestTag,
   getValidTags,
@@ -32,6 +33,7 @@ export default async function main() {
   const customReleaseRules = core.getInput('custom_release_rules');
   const shouldFetchAllTags = core.getInput('fetch_all_tags');
   const commitSha = core.getInput('commit_sha');
+  const validScopes = core.getInput('scopes');
 
   let mappedReleaseRules;
   if (customReleaseRules) {
@@ -122,6 +124,10 @@ export default async function main() {
     core.setOutput('previous_tag', previousTag.name);
 
     commits = await getCommits(previousTag.commit.sha, commitRef);
+
+    if (validScopes) {
+      commits = await getScopedCommits(commits, validScopes.split(','));
+    }
 
     let bump = await analyzeCommits(
       {
