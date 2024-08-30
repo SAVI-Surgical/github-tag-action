@@ -50,12 +50,20 @@ describe('utils', () => {
      */
     const testTags = [
       {
-        name: 'release-1.2.3',
+        name: 'release-v1.2.3',
         commit: { sha: 'string', url: 'string' },
         zipball_url: 'string',
         tarball_url: 'string',
         node_id: 'string',
       },
+      {
+        name: 'v1.2.3',
+        commit: { sha: 'string', url: 'string' },
+        zipball_url: 'string',
+        tarball_url: 'string',
+        node_id: 'string',
+      },
+      // invalid tag - doesn't start with prefix
       {
         name: '1.2.3',
         commit: { sha: 'string', url: 'string' },
@@ -86,28 +94,28 @@ describe('utils', () => {
      */
     const testTags = [
       {
-        name: '1.2.4-prerelease.1',
+        name: 'v1.2.4-prerelease.1',
         commit: { sha: 'string', url: 'string' },
         zipball_url: 'string',
         tarball_url: 'string',
         node_id: 'string',
       },
       {
-        name: '1.2.4-prerelease.2',
+        name: 'v1.2.4-prerelease.2',
         commit: { sha: 'string', url: 'string' },
         zipball_url: 'string',
         tarball_url: 'string',
         node_id: 'string',
       },
       {
-        name: '1.2.4-prerelease.0',
+        name: 'v1.2.4-prerelease.0',
         commit: { sha: 'string', url: 'string' },
         zipball_url: 'string',
         tarball_url: 'string',
         node_id: 'string',
       },
       {
-        name: '1.2.3',
+        name: 'v1.2.3',
         commit: { sha: 'string', url: 'string' },
         zipball_url: 'string',
         tarball_url: 'string',
@@ -128,7 +136,7 @@ describe('utils', () => {
      */
     expect(mockListTags).toHaveBeenCalled();
     expect(validTags[0]).toEqual({
-      name: '1.2.4-prerelease.2',
+      name: 'v1.2.4-prerelease.2',
       commit: { sha: 'string', url: 'string' },
       zipball_url: 'string',
       tarball_url: 'string',
